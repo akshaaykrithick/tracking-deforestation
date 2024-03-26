@@ -1,4 +1,11 @@
+"use client"
+
 import React from "react"
+import Image from "next/image"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+
+import { cn } from "@/lib/utils"
 
 import { LogoutButton } from "./auth/logout-button"
 import { Button } from "./ui/button"
@@ -23,13 +30,24 @@ const routes = [
 ]
 
 const Navbar = () => {
+  const pathname = usePathname()
   return (
-    <div className="fixed inset-x-0 z-50 flex h-10 items-center justify-between border-b border-b-black bg-white">
-      <div className="flex h-full items-center justify-around">
+    <div className="fixed inset-x-0 z-50 flex h-12 items-center justify-between border-b border-b-black bg-white px-2">
+      <div className="flex h-full items-center gap-4">
+        <Link href={"/"}>
+          <Image src="/next.svg" alt="logo" width={50} height={50} />
+        </Link>
         {routes.map((route, index) => (
-          <a key={index} href={route.path}>
+          <Link
+            key={index}
+            href={route.path}
+            className={cn(
+              "rounded-md bg-gray-100 px-1",
+              pathname.includes(route.path) && "bg-gray-200 text-blue-500"
+            )}
+          >
             {route.name}
-          </a>
+          </Link>
         ))}
       </div>
       <Button>

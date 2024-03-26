@@ -12,7 +12,7 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="h-full w-full">
       <Navbar />
-      <div className="h-full w-full pt-10">{children}</div>
+      <div className="h-full w-full pt-12">{children}</div>
     </div>
   )
 }
