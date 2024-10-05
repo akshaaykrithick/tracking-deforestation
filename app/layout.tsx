@@ -4,17 +4,16 @@ import { Inter } from "next/font/google"
 import TRPCProvider from "./_trpc/Provider"
 import "./globals.css"
 import { auth } from "@/auth"
-import { SessionProvider } from "next-auth/react"
-
-import { ToastProvider } from "@/components/provider/toaster-provider"
-
 import {
   ClerkProvider,
   SignInButton,
   SignedIn,
   SignedOut,
-  UserButton
-} from '@clerk/nextjs'
+  UserButton,
+} from "@clerk/nextjs"
+import { SessionProvider } from "next-auth/react"
+
+import { ToastProvider } from "@/components/provider/toaster-provider"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -34,7 +33,7 @@ export default async function RootLayout({
 }) {
   const session = await auth()
   return (
-    <SessionProvider session={session}>
+    <ClerkProvider>
       <TRPCProvider>
         <html lang="en">
           <body className={inter.className}>
@@ -50,6 +49,6 @@ export default async function RootLayout({
           </body>
         </html>
       </TRPCProvider>
-    </SessionProvider>
+    </ClerkProvider>
   )
 }
