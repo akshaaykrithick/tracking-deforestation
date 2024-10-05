@@ -8,7 +8,7 @@ import { currentUser } from "@clerk/nextjs/server"
 const layout = async ({ children }: { children: React.ReactNode }) => {
   const user = await currentUser()
   if (!user) {
-    redirect("/auth/login")
+    redirect("/sign-in")
   }
   return (
     <div className="h-full w-full">
