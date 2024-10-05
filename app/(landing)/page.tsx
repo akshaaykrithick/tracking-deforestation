@@ -2,12 +2,12 @@
 
 import Link from "next/link"
 
-import { useCurrentUser } from "@/hooks/use-current-user"
 import { trpc } from "@/app/_trpc/client"
+import { useAuth, useUser } from "@clerk/nextjs"
 
 export default function Home() {
   const hello = trpc.test.useQuery()
-  const user = useCurrentUser()
+  const user = useUser()
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
@@ -20,7 +20,7 @@ export default function Home() {
         <div className="flex flex-col items-center gap-2">
           <div className="flex flex-col items-center justify-center gap-4">
             <p className="text-center text-2xl text-white">
-              {user && <span>Logged in as {user?.name}</span>}
+              {user && <span>Logged in as {user?.user?.fullName}</span>}
             </p>
             <div>
               {!user && (

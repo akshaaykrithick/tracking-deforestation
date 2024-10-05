@@ -8,6 +8,14 @@ import { SessionProvider } from "next-auth/react"
 
 import { ToastProvider } from "@/components/provider/toaster-provider"
 
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -32,6 +40,13 @@ export default async function RootLayout({
           <body className={inter.className}>
             <ToastProvider />
             <div className="h-full">{children}</div>
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+            {children}
           </body>
         </html>
       </TRPCProvider>
