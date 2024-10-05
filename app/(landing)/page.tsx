@@ -13,6 +13,7 @@ import {
 
 import { LogoutButton } from "@/components/auth/logout-button"
 import { trpc } from "@/app/_trpc/client"
+import { Button } from "@/components/ui/button"
 
 export default function Home() {
   const hello = trpc.test.useQuery()
@@ -37,6 +38,9 @@ export default function Home() {
               </SignedOut>
               <SignedIn>
                 <UserButton />
+                <Link href="/forest">
+                  <Button className="text-white">Forest Reserves</Button>
+                </Link>
               </SignedIn>
             </div>
           </div>
