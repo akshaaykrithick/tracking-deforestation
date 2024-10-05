@@ -3,7 +3,7 @@
 import Link from "next/link"
 
 import { trpc } from "@/app/_trpc/client"
-import { SignIn, useAuth, useUser } from "@clerk/nextjs"
+import { SignIn, SignInButton, useAuth, useUser } from "@clerk/nextjs"
 import { LogoutButton } from "@/components/auth/logout-button"
 
 export default function Home() {
@@ -25,7 +25,7 @@ export default function Home() {
             </p>
             <div>
               {!user && (
-                <SignIn />
+                <SignInButton signUpForceRedirectUrl={"/forest"} />
               )}
               {user && (
                 <LogoutButton />
