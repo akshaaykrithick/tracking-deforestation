@@ -3,7 +3,8 @@
 import Link from "next/link"
 
 import { trpc } from "@/app/_trpc/client"
-import { useAuth, useUser } from "@clerk/nextjs"
+import { SignIn, useAuth, useUser } from "@clerk/nextjs"
+import { LogoutButton } from "@/components/auth/logout-button"
 
 export default function Home() {
   const hello = trpc.test.useQuery()
@@ -24,19 +25,11 @@ export default function Home() {
             </p>
             <div>
               {!user && (
-                <Link
-                  href={user ? "/api/auth/signout" : "/api/auth/signin"}
-                  className="mr-2 rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
-                >
-                  {user ? "Sign out" : "Sign in"}
-                </Link>
+                <SignIn />
               )}
-              <Link
-                href={!user ? "/api/auth/signout" : "/api/auth/signin"}
-                className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
-              >
-                {!user ? "Sign out" : "Sign in"}
-              </Link>
+              {user && (
+                <LogoutButton />
+              )}
             </div>
           </div>
         </div>
