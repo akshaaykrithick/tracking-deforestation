@@ -39,12 +39,6 @@ export default async function RootLayout({
           <body className={inter.className}>
             <ToastProvider />
             <div className="h-full">{children}</div>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
             {children}
           </body>
         </html>

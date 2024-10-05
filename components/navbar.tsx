@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils"
 
 import { LogoutButton } from "./auth/logout-button"
 import { Button } from "./ui/button"
+import { SignedOut, SignInButton, SignedIn, UserButton } from "@clerk/nextjs"
 
 const routes = [
   {
@@ -50,9 +51,12 @@ const Navbar = () => {
           </Link>
         ))}
       </div>
-      <Button>
-        <LogoutButton>Logout</LogoutButton>
-      </Button>
+      <SignedOut>
+        <SignInButton />
+      </SignedOut>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
     </div>
   )
 }

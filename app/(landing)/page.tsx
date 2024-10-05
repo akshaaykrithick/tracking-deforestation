@@ -1,10 +1,18 @@
 "use client"
 
 import Link from "next/link"
+import {
+  SignIn,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  useAuth,
+  useUser,
+} from "@clerk/nextjs"
 
-import { trpc } from "@/app/_trpc/client"
-import { SignIn, SignInButton, useAuth, useUser } from "@clerk/nextjs"
 import { LogoutButton } from "@/components/auth/logout-button"
+import { trpc } from "@/app/_trpc/client"
 
 export default function Home() {
   const hello = trpc.test.useQuery()
@@ -24,12 +32,12 @@ export default function Home() {
               {user && <span>Logged in as {user?.user?.fullName}</span>}
             </p>
             <div>
-              {!user && (
-                <SignInButton signUpForceRedirectUrl={"/forest"} />
-              )}
-              {user && (
-                <LogoutButton />
-              )}
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
             </div>
           </div>
         </div>
